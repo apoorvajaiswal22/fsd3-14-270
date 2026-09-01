@@ -1,0 +1,25 @@
+import http from 'http';
+import {createReadStream} from "fs";
+import { readFile } from 'fs/promises';
+import { type } from 'os';
+
+const server = http.createServer(async (req, res) => {  
+    if(req.url ==='/stream'){
+const stream = createReadStream("big.txt",{ encoding: "utf-8"});
+stream.pipe(res);
+    } else if (req.url === "/normal"){
+        const text = await readFile("big.txt");
+        res.end(text);
+    } else if(req.url === '/product'){
+        // res.writeHead() status + content-type
+        res.setHeader("content-type","text/html");
+        res.statusCode= 200;
+
+        const data = createReadStream("product.html");
+        data.pipe(res);
+
+    }
+//  res.end(text);
+});
+
+server.listen(3000, () => {console.log("Server is running at 3000...")});
