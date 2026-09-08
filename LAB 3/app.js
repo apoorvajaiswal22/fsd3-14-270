@@ -1,5 +1,5 @@
 import http from 'http';
-
+// import * as fs from 'fs';
 import { getAllTeams } from './teams.js';
 
 const PORT = 5000;
@@ -46,6 +46,7 @@ const parseJSONBody = (req) => {
 
 
 const server = http.createServer(async (req, res) => {
+    const (pathname, query) = new URL(
 
     if (req.url === '/teams' && req.method === 'GET') {
 
