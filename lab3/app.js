@@ -1,6 +1,6 @@
 import http from 'http';
 // import * as fs from 'fs';
-import { getAllTeams } from './teams.js';
+import { getAllTeams } from '../lab4/teams.js';
 
 const PORT = 5000;
 
