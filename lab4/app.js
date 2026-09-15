@@ -1,5 +1,5 @@
 import http from "http";
-import { getAllTeams, addTeam, getTeamById } from "./teams.js";
+import { getAllTeams, addTeam, getTeamById, deleteTeamById, updateTeamById } from "./teams.js";
 import { parse as parseUrl } from "url";
 
 const PORT = 5000;
@@ -34,26 +34,83 @@ const server = http.createServer(async (req, res) => {
   console.log("Method:", method);
 
   if (pathname === "/api/v1/teams" && method === "GET") {
+
     let teams = getAllTeams();
     return sendJson(res, 200, teams, "count", teams.length);
-  } else if (pathname === "/api/v1/teams" && method === "POST") {
+
+  } 
+  
+  else if (pathname === "/api/v1/teams" && method == "POST") {
+
     const { tname, tl, members } = await parseJSONBody(req);
-    if (!tname || !tl || !members) {
+
+    if (!tname || !tl || !members)
       return sendJson(res, 400, {
-        error: "tname, tl or member not defined",
+        error: "Team Name, Team Leader, or Members not defined",
       });
-      const team = addTeam({ tname, tl, memebers });
-    }
 
     const team = addTeam({ tname, tl, members });
 
     return sendJson(res, 201, team, "Message", "Team registered successfully");
-    return sendJson(res, 201, team);
-  } else {
+
+  } 
+  
+  else if (pathname.startsWith("/api/v1/teams/") && method === "GET") {
+
+    const id = Number(pathname.split("/").pop());
+    const team = getTeamById(id);
+
+    if (!team)
+      return sendJson(res, 400, {
+        error: `Team with id: ${id} not found`,
+      });
+
+    return sendJson(res, 200, team, "Message", "Team Found");
+
+  } 
+  
+  else if (pathname.startsWith("/api/v1/teams/") && method === "DELETE") {
+
+    const id = Number(pathname.split("/").pop());
+    const team = deleteTeamById(id);
+
+    if (!team)
+      return sendJson(res, 400, {
+        error: `Team with id: ${id} not found`,
+      });
+
+    return sendJson(res, 200, team, "Message", "Team deleted successfully");
+
+  } 
+  
+  else if (pathname.startsWith("/api/v1/teams/") && method == "PUT") {
+
+    const id = Number(pathname.split("/").pop());
+
+    const { tname, tl, members } = await parseJSONBody(req);
+
+    if (!tname || !tl || !members)
+      return sendJson(res, 400, {
+        error: "Team Name, Team Leader, or Members not defined",
+      });
+
+    const team = updateTeamById(id, { tname, tl, members });
+
+    if (!team)
+      return sendJson(res, 400, {
+        error: `Team with id: ${id} not found`,
+      });
+
+    return sendJson(res, 200, team, "Message", "Team updated successfully");
+
+  } 
+  
+  else {
     res.statusCode = 404;
+    res.end("Not matching");
   }
-  res.end();
-});
+ 
+}); 
 
 server.listen(PORT, () => {
   console.log("SIH Server is running at ", PORT);

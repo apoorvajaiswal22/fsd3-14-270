@@ -1,2 +1,4 @@
-﻿node_modules/
-.env
+﻿lab3/node_modules
+lab3/big.txt
+lab4/node_modules
+lab5/node_modules
