@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enquiry & Support | BlueSync</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0070f3;
+            --primary-dark: #0051b3;
+            --secondary: #00d2ff;
+            --dark: #0f172a;
+            --card-bg: #1e293b;
+            --text-muted: #94a3b8;
+            --input-bg: #0b1120;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        /* Navbar */
+        header {
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .logo i {
+            color: var(--primary);
+            font-size: 1.8rem;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--secondary);
+        }
+
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        .badge {
+            position: absolute;
+            top: -8px;
+            right: -10px;
+            background: var(--primary);
+            color: white;
+            font-size: 0.7rem;
+            padding: 2px 6px;
+            border-radius: 50%;
+        }
+
+        /* Main Container */
+        .enquiry-container {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1.3fr;
+            gap: 3.5rem;
+        }
+
+        /* Contact Details Side */
+        .contact-info h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, #fff, var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .contact-info p {
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            font-size: 1.05rem;
+        }
+
+        .info-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.2rem;
+            margin-bottom: 1.8rem;
+        }
+
+        .icon-box {
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 112, 243, 0.15);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            border: 1px solid rgba(0, 112, 243, 0.3);
+        }
+
+        .icon-box i {
+            color: var(--secondary);
+            font-size: 1.2rem;
+        }
+
+        .info-text h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .info-text span {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Form Side */
+        .form-card {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .form-card h2 {
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 0.85rem 1rem;
+            background: var(--input-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--secondary);
+        }
+
+        select option {
+            background: var(--dark);
+            color: #fff;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 0.9rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 112, 243, 0.4);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 210, 255, 0.5);
+        }
+
+        /* Footer */
+        footer {
+            background: #090d16;
+            padding: 3rem 2rem 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .footer-socials a {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+
+        .footer-socials a:hover {
+            color: var(--secondary);
+        }
+
+        .copyright {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .enquiry-container {
+                grid-template-columns: 1fr;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <nav>
+            <a href="index.html" class="logo">
+                <i class="fab fa-bluetooth-b"></i> BlueSync
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="enquiry.html" class="active">Enquiry</a></li>
+            </ul>
+            <div class="cart-icon">
+                <i class="fas fa-shopping-bag"></i>
+                <span class="badge">2</span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Enquiry / Contact Form Section -->
+    <main class="enquiry-container">
+        <!-- Contact Details -->
+        <div class="contact-info">
+            <h1>Have a Question? Let's Talk.</h1>
+            <p>Interested in bulk corporate orders, device compatibility questions, or partnership inquiries? Send us a message and our team will get back to you within 24 hours.</p>
+
+            <div class="info-card">
+                <div class="icon-box">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div class="info-text">
+                    <h4>Direct Support</h4>
+                    <span>support@bluesync-devices.com</span>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="icon-box">
+                    <i class="fas fa-phone-alt"></i>
+                </div>
+                <div class="info-text">
+                    <h4>Customer Care Line</h4>
+                    <span>+1 (800) 456-7890</span>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="icon-box">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div class="info-text">
+                    <h4>Global HQ</h4>
+                    <span>742 Wireless Blvd, San Jose, CA 95134</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Form Card -->
+        <div class="form-card">
+            <h2>Product Enquiry</h2>
+            <form action="#" method="POST" onsubmit="event.preventDefault(); alert('Thank you! Your enquiry has been received.');">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" placeholder="John Doe" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" placeholder="john@example.com" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="deviceCategory">Device of Interest</label>
+                    <select id="deviceCategory" required>
+                        <option value="" disabled selected>Select a product type</option>
+                        <option value="earbuds">AeroPods Wireless Earbuds</option>
+                        <option value="speakers">PulseBoom Bluetooth Speaker</option>
+                        <option value="smartwatch">SyncTrack Smart Watch</option>
+                        <option value="peripherals">Bluetooth Mouse & Keyboards</option>
+                        <option value="bulk">Bulk / Corporate Order</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="enquiryType">Enquiry Type</label>
+                    <select id="enquiryType">
+                        <option value="general">General Information</option>
+                        <option value="technical">Compatibility / Technical Question</option>
+                        <option value="sales">Wholesale & Bulk Pricing</option>
+                        <option value="warranty">Warranty & Repairs</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Your Message</label>
+                    <textarea id="message" placeholder="Provide details about your query or requirement..." required></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Send Enquiry</button>
+            </form>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="logo">
+                <i class="fab fa-bluetooth-b"></i> BlueSync
+            </div>
+            <div class="footer-socials">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2026 BlueSync Inc. All rights reserved.
+        </div>
+    </footer>
+
+</body>
+</html>
