@@ -9,7 +9,7 @@ const f2 = () => {
   f3();
   console.log("f2 running");
   console.log("f2 ends");
-};                                     // javascript is synchronous and single threaded
+};                                     // javascript is synchronous and single threaded///////
 const f3 = () => {             
   console.log("f3 starts");
   console.log("f3 running");
