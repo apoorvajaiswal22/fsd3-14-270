@@ -1,3 +1,4 @@
+
 import readline from "readline/promises";
 import { stdin, stdout } from "process";
 import { readFile, writeFile } from "fs/promises";
@@ -18,7 +19,7 @@ const saveCart = async (cart) => {
 const addToCart = async (product) => {
   //product as a object hai
   const cart = await getCart();
-  const isFoundInCart = cart.find((item) => item.id === product.id); //find - array function hai
+  const isFoundInCart = cart.find((item) => item.id === product.id); //find - array function hai///
   if (isFoundInCart) {
     isFoundInCart.qty += product.qty;
   } else cart.push(product);
@@ -53,24 +54,22 @@ const removeProduct = async (pid) => {
 };
 
 const updateQuantity = async (pid) => {
-//similar to add product
-const cart = await getCart();
+  //similar to add product
+  const cart = await getCart();
   const isFoundInCart = cart.find((item) => item.id === pid); //find - array function hai
+
   if (isFoundInCart) {
     if (isFoundInCart.qty == 1) {
-        await removeProduct(pid);
+      await removeProduct(pid);
     } else {
-    isFoundInCart.qty -= 1;
-    await saveCart(cart);
-  console.log(`${isFoundInCart.name} quantity updated in 🛒`);
+      isFoundInCart.qty -= 1;
+      await saveCart(cart);
+      console.log(`${isFoundInCart.name} quantity updated in 🛒`);
+    }
   } else {
     console.log(`Product with id ${pid} not found`);
   }
-  
-
 };
-
-
 
 const main = async () => {
   let choice;
@@ -89,6 +88,7 @@ const main = async () => {
       case 1:
         await displayCart();
         break;
+
       case 2:
         const item = await cin.question("Enter id,name,price,qty:"); //destructre array - property of js18
         const [id, name, price, qty] = item.split(",").map((p) => p.trim()); //split will return array//array pr map lagaya(for loop)
@@ -101,26 +101,27 @@ const main = async () => {
         });
         break;
 
-        case 3: {
-  const pid = await cin.question("Enter product id:");
-  await removeProduct(Number(pid));
-  break;
-}
+      case 3: {
+        const pid = await cin.question("Enter product id:");
+        await removeProduct(Number(pid));
+        break;
+      }
 
-case 4: {
-  const pid = await cin.question("Enter product id:");
-  await updateQuantity(Number(pid));
-  break;
-}
+      case 4: {
+        const pid = await cin.question("Enter product id:");
+        await updateQuantity(Number(pid));
+        break;
+      }
 
-      
       case 5:
         console.log("checkout");
         break;
+
       default:
         console.log("🛑 invalid choice! Try again");
     }
   } while (choice != 5);
+
   cin.close();
 };
 
