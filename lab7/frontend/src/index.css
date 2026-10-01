@@ -5,7 +5,7 @@
 }
 
 h1{
-  text-align:center;
+  text-align:left;
 }
 .container{
   display:flex;
@@ -32,4 +32,22 @@ h1{
   color: whitesmoke;
   font-size: 1.25rem;
   padding: 5px;
+}
+.pen{
+  padding: 10px;
+  border: 2px solid black;
+
+}
+.pen img{
+  height: 300px;
+}
+.pen h1{
+  font: size 1.5rem;;
+}
+.pen button{
+  width: 200px;
+  background-color: blue;
+  color: whitesmoke;
+  font-size: 1.25rem;
+  padding: 5px; 
 }

@@ -1,9 +1,12 @@
-const b1={
-  picUrl:"https://m.media-amazon.com/images/I/518+W2zr3BL._SY385_.jpg",
-  bname:"React Design Pattern",
-  price:1199,
-  quantity:10,
-  rating:5.0,
+import Book from "./components/book";
+import Pen from "./components/pen";
+
+const b1 = {
+  picUrl: "https://m.media-amazon.com/images/I/518+W2zr3BL._SY385_.jpg",
+  bname: "React Design Pattern",
+  price: 2470,
+  quantity: 16,
+  rating: 4.8,
 };
 
 const b2 = {
@@ -14,36 +17,42 @@ const b2 = {
   rating: 5.0,
 };
 
-function Book(props){
-  const{rating,bname,price,quantity,picUrl}=props.book;
-  
-  return(
-    <div className="book">
-      <img 
-      src={picUrl}
-      alt={bname}
-      />
-      <h1>{bname}</h1>
-      <h2>Price:{price}</h2>
-      <h3>Quantity:{quantity}</h3>
-      <h4>Rating:{rating}</h4>
-      <button>Buy Now</button>
-    </div>
+const p1 = {
+  picUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQxyqJX4HRpYc3OJEE0yvNrwNnhgd_IgqliA4WuL9S4g&s=10",
+  pname: "Parker Pen",
+  price: 450,
+  quantity: 1,
+  rating: 4.8,
+};
+
+const p2 = {
+  picUrl: "https://m.media-amazon.com/images/I/41L2D5bCZbL._AC_SL128_.jpg",
+  pname: "Reynolds Pen",
+  price: 1358,
+  quantity:5,
+  rating: 4.7,
+};
+
+export default function App() {
+  return (
+    <>
+      <h1>Online Book Store</h1>
+
+      <div className="container">
+        <Book book={b1} />
+        <Book book={b2} />
+        <Book book={b1} />
+        <Book book={b2} />
+      </div>
+
+      <h1>Online Pen Store</h1>
+
+      <div className="container">
+        <Pen pen={p1} />
+        <Pen pen={p2} />
+        <Pen pen={p1} />
+        <Pen pen={p2} />
+      </div>
+    </>
   );
-}
-
-
-
-export default function App(){
-   return (
-     <>
-     <h1>Online Book Store</h1>
-       <div className="container">
-         <Book book={b1} />
-         <Book book={b2} />
-         <Book book={b1} />
-         <Book book={b2} />
-       </div>
-     </>
-   );
 }
