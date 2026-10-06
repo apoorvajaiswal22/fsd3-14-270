@@ -55,3 +55,8 @@
 
  rafce -> arrow function
  rfce-> function shortcut on es7
+
+ ### App.jsx must be minimum code 
+
+
+ by default button in html is submit button 
